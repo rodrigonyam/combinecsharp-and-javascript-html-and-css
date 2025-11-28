@@ -23,9 +23,6 @@ C:\Users\Rodrigue N\Desktop\css\combinecsharp and javascript,html and css\obj\De
 C:\Users\Rodrigue N\Desktop\css\combinecsharp and javascript,html and css\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
 C:\Users\Rodrigue N\Desktop\css\combinecsharp and javascript,html and css\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
 C:\Users\Rodrigue N\Desktop\css\combinecsharp and javascript,html and css\obj\Debug\net10.0\scopedcss\bundle\RetailWebsite.styles.css
-C:\Users\Rodrigue N\Desktop\css\combinecsharp and javascript,html and css\obj\Debug\net10.0\compressed\g6buvq5ulo-{0}-oicqy5pbhf-oicqy5pbhf.gz
-C:\Users\Rodrigue N\Desktop\css\combinecsharp and javascript,html and css\obj\Debug\net10.0\compressed\le0zn2078x-{0}-88ym3tetd9-88ym3tetd9.gz
-C:\Users\Rodrigue N\Desktop\css\combinecsharp and javascript,html and css\obj\Debug\net10.0\compressed\83qp1qbs08-{0}-tpe7kpm4xy-tpe7kpm4xy.gz
 C:\Users\Rodrigue N\Desktop\css\combinecsharp and javascript,html and css\obj\Debug\net10.0\staticwebassets.build.json
 C:\Users\Rodrigue N\Desktop\css\combinecsharp and javascript,html and css\obj\Debug\net10.0\staticwebassets.build.json.cache
 C:\Users\Rodrigue N\Desktop\css\combinecsharp and javascript,html and css\obj\Debug\net10.0\staticwebassets.development.json
@@ -38,3 +35,6 @@ C:\Users\Rodrigue N\Desktop\css\combinecsharp and javascript,html and css\obj\De
 C:\Users\Rodrigue N\Desktop\css\combinecsharp and javascript,html and css\obj\Debug\net10.0\RetailWebsite.genruntimeconfig.cache
 C:\Users\Rodrigue N\Desktop\css\combinecsharp and javascript,html and css\obj\Debug\net10.0\ref\RetailWebsite.dll
 C:\Users\Rodrigue N\Desktop\css\combinecsharp and javascript,html and css\obj\Debug\net10.0\RetailWebsite.sourcelink.json
+C:\Users\Rodrigue N\Desktop\css\combinecsharp and javascript,html and css\obj\Debug\net10.0\compressed\g6buvq5ulo-{0}-3xva2uhnx4-3xva2uhnx4.gz
+C:\Users\Rodrigue N\Desktop\css\combinecsharp and javascript,html and css\obj\Debug\net10.0\compressed\le0zn2078x-{0}-ocyx6uetgq-ocyx6uetgq.gz
+C:\Users\Rodrigue N\Desktop\css\combinecsharp and javascript,html and css\obj\Debug\net10.0\compressed\83qp1qbs08-{0}-skgwnjg34p-skgwnjg34p.gz

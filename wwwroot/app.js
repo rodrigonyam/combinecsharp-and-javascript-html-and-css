@@ -120,8 +120,8 @@ function displayProducts(productsToDisplay) {
         return;
     }
 
-    productsGrid.innerHTML = productsToDisplay.map(product => `
-        <div class="product-card">
+    productsGrid.innerHTML = productsToDisplay.map((product, index) => `
+        <div class="product-card" style="animation-delay: ${index * 0.1}s">
             <img src="${product.imageUrl}" alt="${product.name}" class="product-image" onerror="this.src='https://via.placeholder.com/400x250?text=Product+Image'">
             <div class="product-info">
                 <div class="product-category">${product.category}</div>
@@ -140,6 +140,9 @@ function displayProducts(productsToDisplay) {
             </div>
         </div>
     `).join('');
+    
+    // Add intersection observer for scroll animations
+    observeProducts();
 }
 
 // Generate Star Rating
@@ -219,7 +222,24 @@ function addToCart(productId) {
 
     updateCartCount();
     saveCartToStorage();
-    showNotification('Product added to cart!');
+    
+    // Animate cart button
+    const cartBtn = document.getElementById('cartBtn');
+    cartBtn.classList.add('pulse');
+    setTimeout(() => cartBtn.classList.remove('pulse'), 600);
+    
+    // Animate the add to cart button
+    const addBtn = event.target;
+    addBtn.classList.add('added');
+    const originalText = addBtn.textContent;
+    addBtn.textContent = '✓ Added!';
+    setTimeout(() => {
+        addBtn.classList.remove('added');
+        addBtn.textContent = originalText;
+    }, 1000);
+    
+    showNotification('🎉 Product added to cart!');
+    createFloatingEmoji('🛒', event.clientX, event.clientY);
 }
 
 // Update Cart Count
@@ -442,3 +462,220 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// Create floating emoji animation
+function createFloatingEmoji(emoji, x, y) {
+    const emojiEl = document.createElement('div');
+    emojiEl.textContent = emoji;
+    emojiEl.style.cssText = `
+        position: fixed;
+        left: ${x}px;
+        top: ${y}px;
+        font-size: 2rem;
+        pointer-events: none;
+        z-index: 9999;
+        animation: floatUp 1.5s ease-out forwards;
+    `;
+    document.body.appendChild(emojiEl);
+    
+    const floatAnimation = document.createElement('style');
+    floatAnimation.textContent = `
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-150px) scale(1.5);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(floatAnimation);
+    
+    setTimeout(() => {
+        emojiEl.remove();
+        floatAnimation.remove();
+    }, 1500);
+}
+
+// Intersection Observer for scroll animations
+function observeProducts() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+    
+    document.querySelectorAll('.product-card').forEach(card => {
+        observer.observe(card);
+    });
+}
+
+// Add scroll progress indicator
+function addScrollProgress() {
+    const progressBar = document.createElement('div');
+    progressBar.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #0066cc, #00a86b);
+        width: 0%;
+        z-index: 1001;
+        transition: width 0.2s ease;
+    `;
+    document.body.appendChild(progressBar);
+    
+    window.addEventListener('scroll', () => {
+        const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrolled = (window.scrollY / windowHeight) * 100;
+        progressBar.style.width = scrolled + '%';
+    });
+}
+
+// Add parallax effect to hero section
+function addParallaxEffect() {
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+    
+    window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY;
+        if (scrolled < window.innerHeight) {
+            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            hero.style.opacity = 1 - (scrolled / 600);
+        }
+    });
+}
+
+// Add typing effect to search input
+function addSearchPlaceholderAnimation() {
+    const searchInput = document.getElementById('searchInput');
+    if (!searchInput) return;
+    
+    const placeholders = [
+        'Search medical equipment...',
+        'Find syringes, gloves...',
+        'Search lab supplies...',
+        'Find pharmacy items...',
+        'Search temperature monitors...'
+    ];
+    
+    let currentIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    
+    function typeEffect() {
+        const currentText = placeholders[currentIndex];
+        
+        if (document.activeElement === searchInput) {
+            return;
+        }
+        
+        if (!isDeleting && charIndex <= currentText.length) {
+            searchInput.placeholder = currentText.substring(0, charIndex);
+            charIndex++;
+        } else if (isDeleting && charIndex >= 0) {
+            searchInput.placeholder = currentText.substring(0, charIndex);
+            charIndex--;
+        }
+        
+        if (charIndex === currentText.length) {
+            setTimeout(() => isDeleting = true, 2000);
+        }
+        
+        if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            currentIndex = (currentIndex + 1) % placeholders.length;
+        }
+        
+        const speed = isDeleting ? 50 : 100;
+        setTimeout(typeEffect, speed);
+    }
+    
+    setTimeout(typeEffect, 1000);
+}
+
+// Add smooth cart count animation
+function updateCartCount() {
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const countElement = document.getElementById('cartCount');
+    
+    // Animate the number change
+    const currentCount = parseInt(countElement.textContent) || 0;
+    if (currentCount !== totalItems) {
+        countElement.style.transform = 'scale(1.5)';
+        countElement.style.transition = 'transform 0.3s ease';
+        
+        setTimeout(() => {
+            countElement.textContent = totalItems;
+            countElement.style.transform = 'scale(1)';
+        }, 150);
+    }
+}
+
+// Add keyboard shortcuts
+function addKeyboardShortcuts() {
+    document.addEventListener('keydown', (e) => {
+        // Press 'S' to focus search
+        if (e.key === 's' && !e.ctrlKey && !e.metaKey && document.activeElement.tagName !== 'INPUT') {
+            e.preventDefault();
+            document.getElementById('searchInput').focus();
+        }
+        
+        // Press 'C' to open cart
+        if (e.key === 'c' && !e.ctrlKey && !e.metaKey && document.activeElement.tagName !== 'INPUT') {
+            e.preventDefault();
+            openCart();
+        }
+        
+        // Press 'Escape' to close modals
+        if (e.key === 'Escape') {
+            closeCartModal();
+            closeCheckoutModal();
+            closeConfirmationModal();
+        }
+    });
+}
+
+// Add product quick view on card click
+function addProductQuickView() {
+    document.addEventListener('click', (e) => {
+        const productCard = e.target.closest('.product-card');
+        if (productCard && !e.target.classList.contains('add-to-cart-btn')) {
+            productCard.style.animation = 'none';
+            setTimeout(() => {
+                productCard.style.animation = '';
+            }, 10);
+        }
+    });
+}
+
+// Initialize enhanced features
+document.addEventListener('DOMContentLoaded', () => {
+    addScrollProgress();
+    addParallaxEffect();
+    addSearchPlaceholderAnimation();
+    addKeyboardShortcuts();
+    addProductQuickView();
+    initScrollToTop();
+});
+
+// Scroll to top button functionality
+function initScrollToTop() {
+    const scrollBtn = document.getElementById('scrollToTop');
+    if (!scrollBtn) return;
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            scrollBtn.classList.add('visible');
+        } else {
+            scrollBtn.classList.remove('visible');
+        }
+    });
+}

@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,12 +31,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("AllowAll");
+
+// Serve static files from wwwroot
+app.UseDefaultFiles();
 app.UseStaticFiles();
-app.UseRouting();
+
 app.UseAuthorization();
 app.MapControllers();
-
-// Serve index.html for root path
-app.MapGet("/", () => Results.Redirect("/index.html"));
 
 app.Run();

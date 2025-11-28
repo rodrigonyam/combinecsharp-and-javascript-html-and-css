@@ -30,10 +30,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("AllowAll");
 app.UseStaticFiles();
+app.UseRouting();
 app.UseAuthorization();
 app.MapControllers();
 
-// Serve the frontend
-app.MapFallbackToFile("index.html");
+// Serve index.html for root path
+app.MapGet("/", () => Results.Redirect("/index.html"));
 
 app.Run();

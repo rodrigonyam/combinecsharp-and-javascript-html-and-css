@@ -37,3 +37,4 @@ C:\Users\Rodrigue N\Desktop\css\combinecsharp and javascript,html and css\obj\De
 C:\Users\Rodrigue N\Desktop\css\combinecsharp and javascript,html and css\obj\Debug\net10.0\RetailWebsite.pdb
 C:\Users\Rodrigue N\Desktop\css\combinecsharp and javascript,html and css\obj\Debug\net10.0\RetailWebsite.genruntimeconfig.cache
 C:\Users\Rodrigue N\Desktop\css\combinecsharp and javascript,html and css\obj\Debug\net10.0\ref\RetailWebsite.dll
+C:\Users\Rodrigue N\Desktop\css\combinecsharp and javascript,html and css\obj\Debug\net10.0\RetailWebsite.sourcelink.json

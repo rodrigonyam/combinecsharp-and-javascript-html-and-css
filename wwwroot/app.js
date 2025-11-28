@@ -26,10 +26,13 @@ const searchInput = document.getElementById('searchInput');
 
 // Initialize App
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('App initializing...');
+    console.log('API Base URL:', API_BASE_URL);
     loadProducts();
     loadCategories();
     setupEventListeners();
     loadCartFromStorage();
+    console.log('App initialized');
 });
 
 // Setup Event Listeners
